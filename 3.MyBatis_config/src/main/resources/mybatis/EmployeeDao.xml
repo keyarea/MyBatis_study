@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace: 名称空间; 写接口的全类名; 相当于告诉MyBatis是实现哪个接口的; -->
+<mapper namespace="net.qipo.dao.EmployeeDao">
+    <!--
+    public Employee getEmpById(Integer id);
+    public int updateEmployee(Employee employee);
+    public int deleteEmployee(Integer id);
+    public int insertEmployee(Employee employee);
+     -->
+    <select id="getEmpById" resultType="Employee">
+        SELECT * FROM t_employee WHERE id=#{id}
+    </select>
+
+    <!-- 默认不区分环境 -->
+    <select id="getEmpById" resultType="Employee" databaseId="mysql">
+        SELECT * FROM t_employee WHERE id=#{id}
+    </select>
+
+    <select id="getEmpById" resultType="Employee" databaseId="oracle">
+        SELECT * FROM t_employee WHERE id=#{id}
+    </select>
+
+    <!-- 增删改不用写返回值类型,增删改是返回影响多少行
+        MyBatis 自动判断,如果是数字
+        如果是boolean: 影响0行就是自动封装false,否则true
+     -->
+    <update id="updateEmployee" >
+        UPDATE t_employee SET empname=#{empName},gender=#{gender},email=#{email} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteEmployee">
+        DELETE FROM t_employee WHERE id=#{id}
+    </delete>
+
+
+    <insert id="insertEmployee">
+        INSERT  INTO t_employee(empname,gender,email) VALUES(#{empName},#{gender},#{email})
+    </insert>
+</mapper>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- namespace: 名称空间; 写接口的全类名; 相当于告诉MyBatis是实现哪个接口的; -->
+<mapper namespace="net.qipo.dao.EmployeeDao">
+    <!--  这个文件中能写的所有标签
+        cache: 和缓存有关；
+        cache-ref： 和缓存有关；
+        delete、update、insert、select: 增删改查;
+            databaseId：指定这个CRUD属于哪个数据库；
+        parameterMap: 参数map：废弃、、原本是来做复杂参数映射的；
+        resultMap： 结果映射；自定义结果集的封装规则；
+        sql： 抽取可重用的sql
+      -->
+
+
+
+    <!--
+    public Employee getEmpById(Integer id);
+    public int updateEmployee(Employee employee);
+    public int deleteEmployee(Integer id);
+    public int insertEmployee(Employee employee);
+     -->
+    <select id="getEmpById" resultType="net.qipo.bean.Employee">
+        SELECT * FROM t_employee WHERE id=#{id}
+    </select>
+
+    <!-- 增删改不用写返回值类型,增删改是返回影响多少行
+        MyBatis 自动判断,如果是数字
+        如果是boolean: 影响0行就是自动封装false,否则true
+     -->
+    <update id="updateEmployee" >
+        UPDATE t_employee SET empname=#{empName},gender=#{gender},email=#{email} WHERE id=#{id}
+    </update>
+
+    <delete id="deleteEmployee">
+        DELETE FROM t_employee WHERE id=#{id}
+    </delete>
+
+
+    <!-- 让MyBatis自动的将自增id赋值给传入的employee对象的id属性
+        useGeneratedKeys="true": 原生jdbc获取自增主键的方法；
+        keyProperty: 将刚才自增的id封装给哪个属性
+     -->
+    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">
+        INSERT  INTO t_employee(empname,gender,email) VALUES(#{empName},#{gender},#{email})
+    </insert>
+
+    <!--    <insert id="insertEmployee" useGeneratedKeys="true" keyProperty="id">-->
+<!--         &lt;!&ndash; 查询主键-->
+<!--            order="BEFORE": 在核心sql语句之前先运行一个sql查到id；将拿到的id赋值给javaBean哪个属性；-->
+<!--          &ndash;&gt;-->
+<!--        <selectKey order="BEFORE" resultType="integer" keyProperty="id">-->
+<!--            SELECT max(id)+1 from t_employee-->
+<!--        </selectKey>-->
+<!--        INSERT  INTO t_employee(id,empname,gender,email) VALUES(#{id},#{empName},#{gender},#{email})-->
+<!--    </insert>-->
+</mapper>
