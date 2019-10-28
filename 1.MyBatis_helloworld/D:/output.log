@@ -1,6 +1,0 @@
-DEBUG (org.apache.ibatis.logging.LogFactory:135)- Logging initialized using 'class org.apache.ibatis.logging.log4j.Log4jImpl' adapter.
-DEBUG (org.apache.ibatis.datasource.pooled.PooledDataSource:335)- PooledDataSource forcefully closed/removed all connections.
-DEBUG (org.apache.ibatis.datasource.pooled.PooledDataSource:335)- PooledDataSource forcefully closed/removed all connections.
-DEBUG (org.apache.ibatis.datasource.pooled.PooledDataSource:335)- PooledDataSource forcefully closed/removed all connections.
-DEBUG (org.apache.ibatis.datasource.pooled.PooledDataSource:335)- PooledDataSource forcefully closed/removed all connections.
-DEBUG (org.apache.ibatis.transaction.jdbc.JdbcTransaction:137)- Opening JDBC Connection

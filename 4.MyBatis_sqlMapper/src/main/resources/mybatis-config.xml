@@ -21,5 +21,7 @@
         <!-- resource: 表示从类路径下找资源 -->
         <!--        <mapper resource="EmployeeDao.xml"/>-->
         <mapper resource="mybatis/EmployeeDao.xml"/>
+        <mapper resource="mybatis/CatDao.xml"/>
+        <mapper resource="mybatis/KeyDao.xml"/>
     </mappers>
 </configuration>

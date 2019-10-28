@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qipo.dao.KeyDao">
+    <select id="getKeyByID" resultMap="mykey">
+        select k.id,k.`keyname`, k.`lockid`,l.`id` lid,l.`lockName`
+         from t_key k left join t_lock l on k.`lockid`=l.`id`
+        where   k.`id`=#{id}
+    </select>
+
+    <!-- 自定义封装规则,使用级联属性封装联合查询出来的结果   -->
+    <resultMap id="mykey" type="net.qipo.bean.Key">
+        <id column="id" property="id"/>
+        <result column="keyname" property="keyName"/>
+        <result property="lock.id" column="lid" />
+        <result property="lock.lockName" column="lockName"/>
+    </resultMap>
+</mapper>
