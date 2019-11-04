@@ -9,11 +9,43 @@
         where   k.`id`=#{id}
     </select>
 
-    <!-- 自定义封装规则,使用级联属性封装联合查询出来的结果   -->
-    <resultMap id="mykey" type="net.qipo.bean.Key">
-        <id column="id" property="id"/>
-        <result column="keyname" property="keyName"/>
-        <result property="lock.id" column="lid" />
-        <result property="lock.lockName" column="lockName"/>
+    <select id="getKeyByIDSimple" resultMap="mykey01">
+        SELECT * FROM t_key WHERE id=#{id}
+    </select>
+
+<!--    public List<Key> getKeysByLockId(Integer id);
+    按照锁子的id查出所有的key
+-->
+    <select id="getKeysByLockId" resultType="net.qipo.bean.Key">
+        select * from t_key where lockid=#{id}
+    </select>
+
+    <resultMap id="mykey01" type="net.qipo.bean.Key">
+        <id  property="id" column="id"/>
+        <result property="keyName" column="keyname" />
+        <!-- 告诉mybatis自己去调用一个查询查询锁 -->
+        <!-- select：制定一个查询的唯一标识 , mybatis会自动调用指定的sql将查出来的lock封装进来-->
+        <!-- 这个方法需要锁子id，告诉mybatis把哪一列的值传递过去， column: 指定将那一列的数据传递进去 -->
+        <association property="lock" select="net.qipo.dao.LockDao.getLockByIdSimple" column="lockid" fetchType="eager"></association>
     </resultMap>
+    <!-- 自定义封装规则,使用级联属性封装联合查询出来的结果   -->
+<!--    <resultMap id="mykey" type="net.qipo.bean.Key">-->
+<!--        <id column="id" property="id"/>-->
+<!--        <result column="keyname" property="keyName"/>-->
+<!--        <result property="lock.id" column="lid" />-->
+<!--        <result property="lock.lockName" column="lockName"/>-->
+<!--    </resultMap>-->
+
+    <!-- mybatis推荐的 <association property=""></association> -->
+        <resultMap id="mykey" type="net.qipo.bean.Key">
+            <id column="id" property="id"/>
+            <result column="keyname" property="keyName"/>
+            <!-- 接下来的属性是一个对象，自定义这个对象的封装规则；使用association标签，标识联合了一个对象 -->
+            <!-- javaType: 指定这个属性的类型 -->
+            <association property="lock" javaType="net.qipo.bean.Lock">
+                <!-- 定义lock属性定义的这个对象如何封装 -->
+                <id column="lid" property="id"/>
+                <result property="lockName" column="lockName"/>
+            </association>
+        </resultMap>
 </mapper>

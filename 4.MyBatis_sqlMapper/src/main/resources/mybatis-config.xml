@@ -3,6 +3,12 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
+    <settings>
+        <!-- 开启延迟加载开关 -->
+        <setting name="lazyLoadingEnabled" value="true"/>
+        <!-- 开启属性按需加载 -->
+        <setting name="aggressiveLazyLoading" value="false"/>
+    </settings>
     <environments default="development">
         <environment id="development">
             <transactionManager type="JDBC"/>
@@ -23,5 +29,6 @@
         <mapper resource="mybatis/EmployeeDao.xml"/>
         <mapper resource="mybatis/CatDao.xml"/>
         <mapper resource="mybatis/KeyDao.xml"/>
+        <mapper resource="mybatis/LockDao.xml"/>
     </mappers>
 </configuration>
