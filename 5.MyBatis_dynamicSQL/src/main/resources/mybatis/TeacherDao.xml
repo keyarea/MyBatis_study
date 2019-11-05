@@ -4,6 +4,10 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.qipo.dao.TeacherDao">
 
+    <!-- 抽取可重用的sql语句 -->
+    <sql id="selectSql">
+        SELECT * FROM t_teacher
+    </sql>
     <!-- public Teacher getTeacherById(Integer id); -->
     <select id="getTeacherById" resultMap="teacherMap">
         SELECT * FROM t_teacher WHERE id=#{id}
@@ -69,13 +73,58 @@
             collection：指定帮我们遍历的集合的key
             close="" :以什么结束
             index="" : 索引
-                如果遍历的是一个
+                如果遍历的是一个List: index: 指定的变量保存了当前索引的
+                如果遍历的是一个map： index：指定的变量保存了当前遍历的元素的key
+                                  item：就是保存当前遍历元素的值
             item="变量名"： 每次遍历出的元素起一个变量名方便引用
             open="": 以什么开始
             separator="" 每个元素之间的分割符
          -->
-        <foreach collection="ids" close="" index=")" item="id_item" open="(" separator=",">
+        <foreach collection="ids" close=")"  item="id_item" open="(" separator=",">
             #{id_item}
         </foreach>
     </select>
+
+    <!--     public List<Teacher> getTeacherByConditionChoose(Teacher teacher); -->
+    <select id="getTeacherByConditionChoose" resultMap="teacherMap">
+        <include refid="selectSql"></include>
+        <where>
+            <choose>
+                <when test="id!=null">
+                    id=#{id}
+                </when>
+                <when test="name!=null and !name.equals(&quot;&quot;)">
+                    teacherName=#{name}
+                </when>
+                <when test="birth_date!=null">
+                    birth_date=#{birth}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--     public Teacher updateTeacher(Teacher teacher); -->
+    <update id="updateTeacher" >
+        UPDATE t_teacher
+        <set>
+            <if test="name!=null and !name.equals(&quot;&quot;)">
+                teacherName=#{name},
+            </if>
+            <if test="course!=null and !course.equals(&quot;&quot;)">
+                class_name=#{course},
+            </if>
+            <if test="address!=null and !address.equals(&quot;&quot;)">
+                address=#{address}
+            </if>
+            <if test="birth!=null">
+                birth_date=#{birth}
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
 </mapper>

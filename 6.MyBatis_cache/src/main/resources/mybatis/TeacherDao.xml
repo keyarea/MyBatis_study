@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="net.qipo.dao.TeacherDao">
+    <!-- 使用二级缓存 -->
+    <cache> </cache>
+    <!-- 抽取可重用的sql语句 -->
+    <sql id="selectSql">
+        SELECT * FROM t_teacher
+    </sql>
+    <!-- public Teacher getTeacherById(Integer id); -->
+    <select id="getTeacherById" resultMap="teacherMap">
+        SELECT * FROM t_teacher WHERE id=#{id}
+    </select>
+
+    <resultMap id="teacherMap" type="net.qipo.bean.Teacher">
+        <id property="id" column="id"/>
+        <result property="name" column="teacherName"/>
+        <result property="course" column="class_name"/>
+        <result property="address" column="address"/>
+        <result property="birth" column="birth_date"/>
+    </resultMap>
+
+    <!--     public List<Teacher> getTeacherByCondition(Teacher teacher); -->
+    <!-- if: 可以用来进行判断 -->
+    <select id="getTeacherByCondition" resultMap="teacherMap">
+        SELECT * FROM t_teacher
+        <!-- 截取字符串
+         prefix=""： 前缀，为我们下面的sql整体添加一个前缀
+         prefixOverrides=""： 祛除整体字符串前面多余的字符串
+         suffix="" ：为整体加后缀
+         suffixOverrides="" : 后面哪个多了可以祛除
+         -->
+<!--        <trim prefix="where" prefixOverrides="and">-->
+<!--            &lt;!&ndash; test: 编写判断条件-->
+<!--         test="id!=null" : 取出传入的javaBean的id值,判断其是否为空-->
+<!--         &ndash;&gt;-->
+<!--            <if test="id!=null">-->
+<!--                id > #{id}-->
+<!--            </if>-->
+<!--            <if test="name!=null and !name.equals(&quot;&quot;)">-->
+<!--                and teacherName like #{name}-->
+<!--            </if>-->
+<!--            <if test="birth!=null">-->
+<!--                and birth_date &gt; #{birth}-->
+<!--            </if>-->
+<!--        </trim>-->
+        <!-- where标签可以帮我们祛除掉前面的and -->
+        <where>
+            <!-- test: 编写判断条件
+         test="id!=null" : 取出传入的javaBean的id值,判断其是否为空
+         -->
+            <if test="id!=null">
+                id > #{id}
+            </if>
+            <if test="name!=null and !name.equals(&quot;&quot;)">
+                and teacherName like #{name}
+            </if>
+            <if test="birth!=null">
+                and birth_date &gt; #{birth}
+            </if>
+        </where>
+
+
+    </select>
+
+
+
+    <!--     public List<Teacher> getTeacherByIdIn(List<Integer> ids); -->
+    <select id="getTeacherByIdIn" resultMap="teacherMap">
+        SELECT * FROM t_teacher WHERE id IN
+        <!-- 帮我们遍历集合
+            collection：指定帮我们遍历的集合的key
+            close="" :以什么结束
+            index="" : 索引
+                如果遍历的是一个List: index: 指定的变量保存了当前索引的
+                如果遍历的是一个map： index：指定的变量保存了当前遍历的元素的key
+                                  item：就是保存当前遍历元素的值
+            item="变量名"： 每次遍历出的元素起一个变量名方便引用
+            open="": 以什么开始
+            separator="" 每个元素之间的分割符
+         -->
+        <foreach collection="ids" close=")"  item="id_item" open="(" separator=",">
+            #{id_item}
+        </foreach>
+    </select>
+
+    <!--     public List<Teacher> getTeacherByConditionChoose(Teacher teacher); -->
+    <select id="getTeacherByConditionChoose" resultMap="teacherMap">
+        <include refid="selectSql"></include>
+        <where>
+            <choose>
+                <when test="id!=null">
+                    id=#{id}
+                </when>
+                <when test="name!=null and !name.equals(&quot;&quot;)">
+                    teacherName=#{name}
+                </when>
+                <when test="birth_date!=null">
+                    birth_date=#{birth}
+                </when>
+                <otherwise>
+                    1=1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <!--     public Teacher updateTeacher(Teacher teacher); -->
+    <update id="updateTeacher" >
+        UPDATE t_teacher
+        <set>
+            <if test="name!=null and !name.equals(&quot;&quot;)">
+                teacherName=#{name},
+            </if>
+            <if test="course!=null and !course.equals(&quot;&quot;)">
+                class_name=#{course},
+            </if>
+            <if test="address!=null and !address.equals(&quot;&quot;)">
+                address=#{address}
+            </if>
+            <if test="birth!=null">
+                birth_date=#{birth}
+            </if>
+        </set>
+        <where>
+            id=#{id}
+        </where>
+    </update>
+</mapper>

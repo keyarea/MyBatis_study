@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="net.qipo.test.MyBatisTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-05T13:12:27" hostname="kaideMacBook-Pro.local" time="0.685">
+  <properties/>
+  <testcase name="test05" classname="net.qipo.test.MyBatisTest" time="0.685"/>
+  <system-out><![CDATA[DEBUG 11-05 21:12:27,844 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.0  (LoggingCache.java:62) 
+DEBUG 11-05 21:12:28,229 ==>  Preparing: SELECT * FROM t_teacher WHERE id=?   (BaseJdbcLogger.java:159) 
+DEBUG 11-05 21:12:28,250 ==> Parameters: 1(Integer)  (BaseJdbcLogger.java:159) 
+DEBUG 11-05 21:12:28,265 <==      Total: 1  (BaseJdbcLogger.java:159) 
+Teacher{id=1, name='王五', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
+DEBUG 11-05 21:12:28,270 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.5  (LoggingCache.java:62) 
+Teacher{id=1, name='王五', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
+false
+]]></system-out>
+  <system-err><![CDATA[Tue Nov 05 21:12:27 CST 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+]]></system-err>
+</testsuite>
