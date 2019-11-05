@@ -9,6 +9,17 @@ public class Teacher {
     private String address;
     private Date birth;
 
+    @Override
+    public String toString() {
+        return "Teacher{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", course='" + course + '\'' +
+                ", address='" + address + '\'' +
+                ", birth=" + birth +
+                '}';
+    }
+
     public Integer getId() {
         return id;
     }

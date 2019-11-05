@@ -26,6 +26,21 @@ public class MyBatisTest {
     }
 
     @Test
+    public void test02() {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        TeacherDao teacherDao = sqlSession.getMapper(TeacherDao.class);
+        try {
+            Teacher teacher = new Teacher();
+            //teacher.setId(1);
+            teacher.setName("%a%");
+            List<Teacher> teachers = teacherDao.getTeacherByCondition(teacher);
+            System.out.println(teachers);
+        }finally {
+            sqlSession.close();
+        }
+    }
+
+    @Test
     public void test01() {
         SqlSession sqlSession = sqlSessionFactory.openSession();
         TeacherDao teacherDao = sqlSession.getMapper(TeacherDao.class);
