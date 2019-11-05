@@ -15,7 +15,7 @@
             <!-- 配置连接池 -->
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_test"/>
+                <property name="url" value="jdbc:mysql://localhost:3306/mybatis_test?useSSL=false"/>
                 <property name="username" value="root"/>
                 <property name="password" value="12345678"/>
             </dataSource>
@@ -25,10 +25,6 @@
     <!-- 引入我们自己编写的每一个接口的实现文件 -->
     <mappers>
         <!-- resource: 表示从类路径下找资源 -->
-        <!--        <mapper resource="EmployeeDao.xml"/>-->
-        <mapper resource="mybatis/EmployeeDao.xml"/>
-        <mapper resource="mybatis/CatDao.xml"/>
-        <mapper resource="mybatis/KeyDao.xml"/>
-        <mapper resource="mybatis/LockDao.xml"/>
+        <mapper resource="mybatis/teacherDao.xml"/>
     </mappers>
 </configuration>
