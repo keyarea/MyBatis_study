@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuite name="net.qipo.test.MyBatisTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-05T13:12:27" hostname="kaideMacBook-Pro.local" time="0.685">
+<testsuite name="net.qipo.test.MyBatisTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2019-11-06T02:16:32" hostname="DESKTOP-G6OD6TJ" time="3.23">
   <properties/>
-  <testcase name="test05" classname="net.qipo.test.MyBatisTest" time="0.685"/>
-  <system-out><![CDATA[DEBUG 11-05 21:12:27,844 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.0  (LoggingCache.java:62) 
-DEBUG 11-05 21:12:28,229 ==>  Preparing: SELECT * FROM t_teacher WHERE id=?   (BaseJdbcLogger.java:159) 
-DEBUG 11-05 21:12:28,250 ==> Parameters: 1(Integer)  (BaseJdbcLogger.java:159) 
-DEBUG 11-05 21:12:28,265 <==      Total: 1  (BaseJdbcLogger.java:159) 
-Teacher{id=1, name='王五', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
-DEBUG 11-05 21:12:28,270 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.5  (LoggingCache.java:62) 
-Teacher{id=1, name='王五', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
-false
+  <testcase name="test05" classname="net.qipo.test.MyBatisTest" time="3.23"/>
+  <system-out><![CDATA[DEBUG 11-06 10:16:32,494 Configuring ehcache from ehcache.xml found in the classpath: file:/D:/workSpace/MyBatis_study/6.MyBatis_cache/build/resources/main/ehcache.xml  (ConfigurationFactory.java:132) 
+DEBUG 11-06 10:16:32,501 Configuring ehcache from URL: file:/D:/workSpace/MyBatis_study/6.MyBatis_cache/build/resources/main/ehcache.xml  (ConfigurationFactory.java:98) 
+DEBUG 11-06 10:16:32,502 Configuring ehcache from InputStream  (ConfigurationFactory.java:150) 
+DEBUG 11-06 10:16:32,532 Ignoring ehcache attribute xmlns:xsi  (BeanHandler.java:271) 
+DEBUG 11-06 10:16:32,533 Ignoring ehcache attribute xsi:noNamespaceSchemaLocation  (BeanHandler.java:271) 
+DEBUG 11-06 10:16:32,535 Disk Store Path: D:\44\ehcache  (DiskStoreConfiguration.java:141) 
+DEBUG 11-06 10:16:32,561 Creating new CacheManager with default config  (CacheManager.java:1036) 
+DEBUG 11-06 10:16:32,569 propertiesString is null.  (PropertyUtil.java:88) 
+DEBUG 11-06 10:16:32,585 No CacheManagerEventListenerFactory class specified. Skipping...  (ConfigurationHelper.java:185) 
+DEBUG 11-06 10:16:32,618 No BootstrapCacheLoaderFactory class specified. Skipping...  (Cache.java:955) 
+DEBUG 11-06 10:16:32,619 CacheWriter factory not configured. Skipping...  (Cache.java:929) 
+DEBUG 11-06 10:16:32,626 No CacheExceptionHandlerFactory class specified. Skipping...  (ConfigurationHelper.java:96) 
+DEBUG 11-06 10:16:32,678 Initialized net.sf.ehcache.store.MemoryStore for net.qipo.dao.TeacherDao  (MemoryStore.java:153) 
+DEBUG 11-06 10:16:32,703 Using diskstore path D:\44\ehcache  (DiskStorePathManager.java:169) 
+DEBUG 11-06 10:16:32,704 Holding exclusive lock on D:\44\ehcache\.ehcache-diskstore.lock  (DiskStorePathManager.java:170) 
+DEBUG 11-06 10:16:32,706 Failed to delete file net%002eqipo%002edao%002e%0054eacher%0044ao.data  (DiskStorageFactory.java:860) 
+DEBUG 11-06 10:16:32,710 Failed to delete file net%002eqipo%002edao%002e%0054eacher%0044ao.index  (DiskStorageFactory.java:860) 
+DEBUG 11-06 10:16:32,733 Matching data file missing (or empty) for index file. Deleting index file D:\44\ehcache\net%002eqipo%002edao%002e%0054eacher%0044ao.index  (DiskStorageFactory.java:168) 
+DEBUG 11-06 10:16:32,734 Failed to delete file net%002eqipo%002edao%002e%0054eacher%0044ao.index  (DiskStorageFactory.java:860) 
+DEBUG 11-06 10:16:32,752 Initialised cache: net.qipo.dao.TeacherDao  (Cache.java:1165) 
+DEBUG 11-06 10:16:32,753 CacheDecoratorFactory not configured for defaultCache. Skipping for 'net.qipo.dao.TeacherDao'.  (ConfigurationHelper.java:354) 
+DEBUG 11-06 10:16:32,883 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.0  (LoggingCache.java:62) 
+DEBUG 11-06 10:16:34,156 Update check failed:   (UpdateChecker.java:63) 
+java.io.IOException: Server returned HTTP response code: 403 for URL: http://www.terracotta.org/kit/reflector?pageID=update.properties&kitID=ehcache.default&id=-1442965001&os-name=Windows+10&jvm-name=Java+HotSpot%28TM%29+64-Bit+Server+VM&jvm-version=1.8.0_221&platform=amd64&tc-version=2.6.11&tc-product=Ehcache+Core+2.6.11&source=Ehcache+Core&uptime-secs=1&patch=UNKNOWN
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream0(HttpURLConnection.java:1900)
+	at sun.net.www.protocol.http.HttpURLConnection.getInputStream(HttpURLConnection.java:1498)
+	at net.sf.ehcache.util.UpdateChecker.getUpdateProperties(UpdateChecker.java:108)
+	at net.sf.ehcache.util.UpdateChecker.doCheck(UpdateChecker.java:72)
+	at net.sf.ehcache.util.UpdateChecker.checkForUpdate(UpdateChecker.java:60)
+	at net.sf.ehcache.util.UpdateChecker.run(UpdateChecker.java:51)
+	at java.util.TimerThread.mainLoop(Timer.java:555)
+	at java.util.TimerThread.run(Timer.java:505)
+DEBUG 11-06 10:16:35,087 ==>  Preparing: SELECT * FROM t_teacher WHERE id=?   (BaseJdbcLogger.java:159) 
+DEBUG 11-06 10:16:35,127 ==> Parameters: 1(Integer)  (BaseJdbcLogger.java:159) 
+DEBUG 11-06 10:16:35,266 <==      Total: 1  (BaseJdbcLogger.java:159) 
+Teacher{id=1, name='admin', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
+DEBUG 11-06 10:16:35,269 put added 0 on heap  (Segment.java:425) 
+DEBUG 11-06 10:16:35,275 Cache Hit Ratio [net.qipo.dao.TeacherDao]: 0.5  (LoggingCache.java:62) 
+Teacher{id=1, name='admin', course='语文', address='宝安区', birth=Tue Nov 13 00:00:00 CST 2018}
+true
 ]]></system-out>
-  <system-err><![CDATA[Tue Nov 05 21:12:27 CST 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+  <system-err><![CDATA[Wed Nov 06 10:16:33 CST 2019 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
 ]]></system-err>
 </testsuite>

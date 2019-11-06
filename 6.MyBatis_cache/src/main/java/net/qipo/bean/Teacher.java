@@ -3,7 +3,7 @@ package net.qipo.bean;
 import java.io.Serializable;
 import java.util.Date;
 
-public class Teacher implements Serializable {
+public class Teacher /*implements Serializable*/ {
     private Integer id;
     private String name;
     private String course;

@@ -3,8 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="net.qipo.dao.TeacherDao">
-    <!-- 使用二级缓存 -->
-    <cache> </cache>
+    <!-- 使用默认的二级缓存 -->
+<!--    <cache> </cache>-->
+    <!-- 使用ehcache的二级存 -->
+    <cache type="org.mybatis.caches.ehcache.EhcacheCache"></cache>
     <!-- 抽取可重用的sql语句 -->
     <sql id="selectSql">
         SELECT * FROM t_teacher
